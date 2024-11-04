@@ -58,12 +58,40 @@
 
                             <?php
                         }
+                        else
+                        {
+                            ?>
+                            <div class="msg_erro">
+                                <p>Email já cadastrado.</p>
+                            </div>
+                        <?php 
+                        }
+                    }
+                    else
+                    {
+                        ?>
+                            <div class="msg_erro">
+                                <p>Senhas não conferem.</p>
+                            </div>
+                        <?php
                     }
                 }
                 else
                 {
-                    echo "Tente outra vez".$usuario->msgErro;
+                    ?>
+                        <div class="msg-erro">
+                            <?php echo "Erro: ".$usuario->msgErro?>
+                        </div>
+                    <?php
                 }
+            }
+            else
+            {
+                ?>
+                    <div class="msg-erro">
+                        <p>Preencha todos os campos.</p>
+                    </div>
+                <?php
             }
         
         }
