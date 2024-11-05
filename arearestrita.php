@@ -1,3 +1,7 @@
+<?php
+require_once 'listar.php';
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
