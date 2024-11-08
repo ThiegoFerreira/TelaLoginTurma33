@@ -88,6 +88,12 @@
 
         }
 
+        // public function editarUsuario()
+        // {
+        //     global $pdo;
+        //     $editar = $pdo ->prepare( "")
+        // }
+
     }
 
 ?>
