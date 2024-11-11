@@ -37,8 +37,9 @@ $dados = $usuario->listarUsuarios();
                     <td><?php echo $pessoa['nome'];?></td>
                     <td><?php echo $pessoa['email'];?></td>
                     <td><?php echo $pessoa['telefone'];?></td>
-                    <td><<a class="btn-editar" href="edit.php"><i class="fa-regular fa-pen-to-square"></i></a></td>
+                    <td><a href="edit.php"><input type="submit" value="editar"></a></td>
                     <td><a class="btn-apagar" href="edit.php"><i class="fa-solid fa-eraser"></i></a></td>
+                    
                 </tr>
             
             <?php endforeach;

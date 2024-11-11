@@ -91,7 +91,9 @@
         // public function editarUsuario()
         // {
         //     global $pdo;
-        //     $editar = $pdo ->prepare( "")
+        //     $editar = $pdo ->prepare("SELECT * FROM usuario WHERE id = $id")
+        
+        
         // }
 
     }

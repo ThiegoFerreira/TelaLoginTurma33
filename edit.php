@@ -1,7 +1,8 @@
 <?php
     require_once 'usuario.php';
     $usuario = new Usuario();
-
+    $usuario->conectar("cadastrousuarioturma33", "localhost","root","");
+    
 ?>
 
 
@@ -32,68 +33,25 @@
 
     <?php
 
-        if(isset($_POST['nome']))
+        if(!empty($_GET['id_usuario']))
         {
+            $usuario->conectar("cadastrousuarioturma33","localhost","root","");
+            
+            $id = $_GET['id_usuario'];
+
+            $sqlSelect = "SELECT * FROM usuario WHERE id_usuario = $id;";
+
+            $result = $conectar->query($sqlSelect);
+
+            print_r($result);
+
             $nome = $_POST['nome'];
             $telefone = $_POST['telefone'];
             $email = $_POST['email'];
             $senha = $_POST['senha'];
             $confSenha = addslashes($_POST['confSenha']);
 
-            if(!empty($nome) && !empty($email) && !empty($telefone) && !empty($senha) && !empty($confSenha))
-            {
-                $usuario->conectar("cadastrousuarioturma33","localhost","root","");
-                if($usuario->msgErro == "")
-                {
-                    if($senha == $confSenha)
-                    {
-                        if($usuario->cadastrar($nome, $telefone, $email, $senha))
-                        {
-                            ?>
-
-                                <!-- bloco de HTML -->
-                                <div class="msg-sucesso">
-                                    <p>Cadastrado com Sucesso</p>
-                                    <p>Clique <a href="login.php">aqui</a>para logar.</p>
-                                </div>
-
-                            <?php
-                        }
-                        else
-                        {
-                            ?>
-                            <div class="msg_erro">
-                                <p>Email já cadastrado.</p>
-                            </div>
-                        <?php 
-                        }
-                    }
-                    else
-                    {
-                        ?>
-                            <div class="msg_erro">
-                                <p>Senhas não conferem.</p>
-                            </div>
-                        <?php
-                    }
-                }
-                else
-                {
-                    ?>
-                        <div class="msg-erro">
-                            <?php echo "Erro: ".$usuario->msgErro?>
-                        </div>
-                    <?php
-                }
-            }
-            else
-            {
-                ?>
-                    <div class="msg-erro">
-                        <p>Preencha todos os campos.</p>
-                    </div>
-                <?php
-            }
+            
         
         }
     ?>
