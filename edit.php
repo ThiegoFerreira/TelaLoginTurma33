@@ -51,8 +51,6 @@
             $senha = $_POST['senha'];
             $confSenha = addslashes($_POST['confSenha']);
 
-            
-        
         }
     ?>
 
