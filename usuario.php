@@ -87,11 +87,12 @@
             }
 
         }
+        
 
         // public function editarUsuario()
         // {
         //     global $pdo;
-        //     $editar = $pdo ->prepare("SELECT * FROM usuario WHERE id = $id")
+        //     $editar = $pdo ->prepare("SELECT * FROM usuario WHERE id_usuario = $id")
         
         
         // }

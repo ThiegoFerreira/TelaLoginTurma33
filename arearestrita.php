@@ -22,7 +22,7 @@ $dados = $usuario->listarUsuarios();
                 <th>EMAIL</th>
                 <th>TELEFONE</th>
                 <th>EDITAR</th>
-                <th>EXCLUIR</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -31,15 +31,15 @@ $dados = $usuario->listarUsuarios();
                 {
                     foreach($dados as $pessoa):
             ?>
-
                 <tr>
-                    <td><?php echo $pessoa['id_usuario'];?></td>
-                    <td><?php echo $pessoa['nome'];?></td>
-                    <td><?php echo $pessoa['email'];?></td>
-                    <td><?php echo $pessoa['telefone'];?></td>
-                    <td><a href="edit.php"><input type="submit" value="editar"></a></td>
-                    <td><a class="btn-apagar" href="edit.php"><i class="fa-solid fa-eraser"></i></a></td>
-                    
+                        <td><?php echo $pessoa['id_usuario'];?></td>
+                        <td><?php echo $pessoa['nome'];?></td>
+                        <td><?php echo $pessoa['email'];?></td>
+                        <td><?php echo $pessoa['telefone'];?></td>
+                        <td>
+                            <a href="editar.php?id=<?php echo $pessoa['id_usuario']; ?>">Editar</a> | 
+                            <a href="delete.php?id=<?php echo $pessoa['id_usuario']; ?>">Excluir</a>
+                        </td>         
                 </tr>
             
             <?php endforeach;
