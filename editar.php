@@ -1,51 +1,20 @@
 <?php
-
-$host = 'localhost';
-$nome = 'root';
-$senha = '';
-$dbname = 'cadastrousuarioturma33';
-
-$pdo = new mysqli($host, $nome, $senha, $dbname);
-if($pdo->connect_error)
+require_once 'usuario.php';
+if(isset($_GET['id']))
 {
-    die("Falha na Conexão: " . $usuario->connect_error);
+    $id = $_GET['id'];
+
+    $usuario = new Usuario();
+    $usuario->conectar("cadastrousuarioturma33", "localhost", "root", "");
+    $dados = $usuario->getUsuario($id);
+    
 }
-
-$id_usuario = isset($_GET['id']) ? $_GET['id'] : null;
-
-$sql = "SELECT nome, email, telefone FROM usuario WHERE id_usuario = ?";
-$stmt = $pdo->prepare($sql);
-$stmt->bind_param("i", $id_usuario);
-$stmt->execute();
-$stmt->bind_result($nome, $email, $telefone);
-$stmt->fetch();
-$stmt->close();
-
-if($_SERVER['REQUEST_METHOD'] == 'POST')
+else
 {
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $telefone = $_POST['telefone'];
-
-    $sql = "UPDATE usuario SET nome = ?, email = ?, telefone = ? WHERE id_usuario = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bind_param("sssi", $nome, $email, $telefone, $id_usuario);
-
-    if($stmt->execute())
-    {
-        echo "Dados Atualizados!";
-    }
-    else
-    {
-        echo "Erro Ao Atualizar os Dados!";
-    }
-    $stmt->close();
+    echo "Sem registro";
 }
-$pdo->close();
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,23 +25,72 @@ $pdo->close();
 </head>
 <body>
     <section>
-    <button class="voltar">Voltar <a href="areaRestrita.php"></a></button>
+    <a href="arearestrita.php">VOLTAR</a>
         <div class="area-gggg">
             <form action="" method="post">
-                <div class="area-h1">
-                    <h1>Edição</h1>
-                </div>
-                    <label>Nome</label><br>
-                    <input type="text" name="nome" id="" placeholder="Nome Completo" value="<?php echo htmlspecialchars($nome); ?>"><br><br>
-
-                    <label>Email</label><br>
-                    <input type="email" name="email" id="" placeholder="Digite o Email" value="<?php echo htmlspecialchars($email); ?>"><br><br>
-
-                    <label>Telefone</label><br>
-                    <input type="tel" name="telefone" id="" placeholder="Telefone Completo" value="<?php echo htmlspecialchars($telefone); ?>"><br><br>
-                            
-                    <button class="b3">Concluido</button>
+                <label>Nome:</label><br>
+                <input type="text" name="nome" id="" placeholder="Nome Completo."value = "<?php echo $dados['nome'];?>"><br>
+                <label>Email:</label><br>
+                <input type="email" name="email" id="" placeholder="Digite o Email."value = "<?php echo $dados['email'];?>"><br>
+                <label>Telefone:</label><br>
+                <input type="tel" name="telefone" id="" placeholder="Telefone Completo." value = "<?php echo $dados['telefone'];?>"><br>
+            
+                <input type="submit" value="CADASTRAR">
             </form>
+
+            <?php
+
+        if(isset($_POST['nome']))
+        {
+            $nome = $_POST['nome'];
+            $telefone = $_POST['telefone'];
+            $email = $_POST['email'];
+
+            if(!empty($nome) && !empty($email) && !empty($telefone))
+            {
+                $usuario->conectar("cadastrousuarioturma33","localhost","root","");
+                if($usuario->msgErro == "")
+                {
+                    if($usuario->editarUsuario($id,$nome,$email,$telefone))
+                    {
+                        ?>
+                            <!-- bloco de HTML -->
+                            <div class="msg-sucesso">
+                                <p>Dados atualizado com sucesso!</p>
+                                <p>Clique <a href="arearestrita.php">aqui</a>para voltar.</p>
+                            </div>
+                        <?php
+                    }
+                    else
+                        {
+                            ?>
+                            <div class="msg_erro">
+                                <p>Email já cadastrado.</p>
+                            </div>
+                        <?php 
+                        }
+                }
+                else
+                {
+                    ?>
+                        <div class="msg-erro">
+                            <?php echo "Erro: ".$usuario->msgErro?>
+                        </div>
+                    <?php
+                }
+            }
+            else
+            {
+                ?>
+                    <div class="msg-erro">
+                        <p>Preencha todos os campos.</p>
+                    </div>
+                <?php
+            }
+        
+        }
+    ?>
+            
         </div>
     </section>
     

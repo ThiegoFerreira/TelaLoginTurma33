@@ -94,16 +94,36 @@
             $sql = $pdo->prepare("DELETE FROM usuario WHERE id_usuario = :id");
             $sql->bindValue(":id", $id);
             $sql->execute();
+            
+        }
+        public function getUsuario($id)
+        {
+            global $pdo;
+            $sql = $pdo->prepare("SELECT nome,email,telefone FROM usuario WHERE id_usuario = :id");
+            $sql->bindValue(":id",$id);
+            $sql->execute();
+            
+            if($sql->rowCount()>0)
+            {
+                $dados = $sql->fetch();
+                return $dados;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public function editarUsuario($id, $nome, $email, $telefone)
+        {
+            global $pdo;
+            $sql = $pdo->prepare("UPDATE usuario SET nome = :n, email = :e, telefone = :t WHERE id_usuario = :id");
+            $sql->bindValue(":id", $id);
+            $sql->bindValue(":n", $nome);
+            $sql->bindValue(":e", $email);
+            $sql->bindValue(":t", $telefone);
+            return $sql->execute();
         }
         
-
-        // public function editarUsuario()
-        // {
-        //     global $pdo;
-        //     $editar = $pdo ->prepare("SELECT * FROM usuario WHERE id_usuario = $id")
-        
-        
-        // }
 
     }
 
