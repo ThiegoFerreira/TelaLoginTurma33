@@ -3,17 +3,10 @@ require_once 'usuario.php';
 if(isset($_GET['id']))
 {
     $id = $_GET['id'];
-
     $usuario = new Usuario();
     $usuario->conectar("cadastrousuarioturma33", "localhost", "root", "");
-    $dados = $usuario->getUsuario($id);
-    
+    $dados = $usuario->getUsuario($id);   
 }
-else
-{
-    echo "Sem registro";
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

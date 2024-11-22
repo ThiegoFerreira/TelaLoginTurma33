@@ -9,10 +9,6 @@ if(isset($_GET['id']))
     $dados = $usuario->getUsuario($id);
     
 }
-else
-{
-    echo "Sem registro";
-}
 if (isset($_POST['excluir']))
 {
     $usuario->excluirUsuario($id);

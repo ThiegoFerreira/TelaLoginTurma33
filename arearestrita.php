@@ -37,7 +37,7 @@ $dados = $usuario->listarUsuarios();
                         <td><?php echo $pessoa['email'];?></td>
                         <td><?php echo $pessoa['telefone'];?></td>
                         <td>
-                            <a href="editar.php?id=<?php echo $pessoa['id_usuario']; ?>">Editar</a> | 
+                            <a href="editar.php?id=<?php echo $pessoa['id_usuario']; ?>">Editar</a> 
                             <a href="delete.php?id=<?php echo $pessoa['id_usuario']; ?>">Excluir</a>
                         </td>         
                 </tr>
