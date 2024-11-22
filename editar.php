@@ -21,12 +21,13 @@ else
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="editar.css">
-    <title>Document</title>
+    <title>Editar Usuário</title>
 </head>
 <body>
     <section>
+        <h1>Editar Usuário</h1>
     <a href="arearestrita.php">VOLTAR</a>
-        <div class="area-gggg">
+        <div>
             <form action="" method="post">
                 <label>Nome:</label><br>
                 <input type="text" name="nome" id="" placeholder="Nome Completo."value = "<?php echo $dados['nome'];?>"><br>

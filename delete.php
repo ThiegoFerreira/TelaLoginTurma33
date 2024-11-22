@@ -27,8 +27,9 @@ if (isset($_POST['excluir']))
 </head>
 <body>
 <section>
+    <h1>Excluir Usuário</h1>
     <a href="arearestrita.php">VOLTAR</a>
-        <div class="area-gggg">
+        <div>
             <form action="" method="post">
                 <label>Nome:</label><br>
                 <input type="text" name="nome" id="" placeholder="Nome Completo."value = "<?php echo $dados['nome'];?>"><br>
